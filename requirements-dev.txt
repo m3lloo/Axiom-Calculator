@@ -1,0 +1,11 @@
+# Production Dependencies
+flask>=2.3.0
+python-dotenv>=1.0.0
+
+# Development Dependencies
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.7.0
+flake8>=6.0.0
+pylint>=2.17.0
+gunicorn>=21.2.0

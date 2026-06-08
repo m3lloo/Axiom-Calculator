@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AXIOM CALC - A retro-futuristic scientific calculator with unit conversions">
+    <title>AXIOM CALC - Scientific Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="scanlines"></div>
+
+    <div class="container" role="main">
+
+        <!-- Header -->
+        <header class="header" role="banner">
+            <div class="logo">
+                <span class="logo-ax">AX</span><span class="logo-iom">IOM</span>
+                <span class="logo-tag">COMPUTATIONAL UNIT v2.4</span>
+            </div>
+            <div class="header-status" aria-label="Server status">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span class="status-text">ONLINE</span>
+            </div>
+        </header>
+
+        <!-- Tab Nav -->
+        <nav class="tab-nav" role="tablist" aria-label="Calculator sections">
+            <button class="tab-btn active" data-tab="calc" role="tab" aria-selected="true" aria-controls="tab-calc">⌥
+                CALCULATOR</button>
+            <button class="tab-btn" data-tab="convert" role="tab" aria-selected="false" aria-controls="tab-convert">⇄
+                CONVERTER</button>
+            <button class="tab-btn" data-tab="history" role="tab" aria-selected="false" aria-controls="tab-history">◈
+                HISTORY</button>
+        </nav>
+
+        <!-- CALCULATOR TAB -->
+        <div class="tab-content active" id="tab-calc" role="tabpanel" aria-labelledby="calc">
+            <div class="calc-wrapper">
+
+                <!-- Display -->
+                <div class="display-panel">
+                    <div class="display-label">EXPRESSION</div>
+                    <div class="expression-preview" id="expression-preview" role="status" aria-live="polite"
+                        aria-label="Current expression">_</div>
+                    <div class="display-label mt">RESULT</div>
+                    <div class="result-display" id="result-display" role="status" aria-live="assertive"
+                        aria-label="Calculation result">0</div>
+                    <div class="display-meta" id="display-meta" role="status" aria-live="polite">&nbsp;</div>
+                </div>
+
+                <!-- Mode strip -->
+                <div class="mode-strip" role="group" aria-label="Calculator mode selection">
+                    <button class="mode-btn active" data-mode="basic"
+                        aria-label="Switch to basic calculator mode">BASIC</button>
+                    <button class="mode-btn" data-mode="sci"
+                        aria-label="Switch to scientific calculator mode">SCIENTIFIC</button>
+                </div>
+
+                <!-- Button grid -->
+                <div class="btn-grid" id="btn-grid">
+
+                    <!-- Row 1 – Sci extra (hidden in basic) -->
+                    <div class="sci-row" id="sci-row" role="group" aria-label="Scientific functions">
+                        <button class="calc-btn fn-btn" data-val="sin(" title="Sine function">SIN</button>
+                        <button class="calc-btn fn-btn" data-val="cos(" title="Cosine function">COS</button>
+                        <button class="calc-btn fn-btn" data-val="tan(" title="Tangent function">TAN</button>
+                        <button class="calc-btn fn-btn" data-val="sqrt(" title="Square root">√</button>
+                        <button class="calc-btn fn-btn" data-val="log(" title="Logarithm base 10">LOG</button>
+                        <button class="calc-btn fn-btn" data-val="ln(" title="Natural logarithm">LN</button>
+                        <button class="calc-btn fn-btn" data-val="^" title="Power">xʸ</button>
+                        <button class="calc-btn fn-btn" data-val="abs(" title="Absolute value">|x|</button>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="btn-row" role="group" aria-label="Utility buttons">
+                        <button class="calc-btn util-btn" data-action="clear" title="Clear all (Esc)">AC</button>
+                        <button class="calc-btn util-btn" data-action="backspace"
+                            title="Delete last character (Backspace)">⌫</button>
+                        <button class="calc-btn util-btn" data-val="(" title="Left parenthesis">(</button>
+                        <button class="calc-btn util-btn" data-val=")" title="Right parenthesis">)</button>
+                        <button class="calc-btn op-btn" data-val="%" title="Percent">%</button>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="btn-row" role="group" aria-label="Numbers 7-9 and division">
+                        <button class="calc-btn num-btn" data-val="7" title="Number 7">7</button>
+                        <button class="calc-btn num-btn" data-val="8" title="Number 8">8</button>
+                        <button class="calc-btn num-btn" data-val="9" title="Number 9">9</button>
+                        <button class="calc-btn op-btn" data-val="÷" title="Divide">/</button>
+                        <button class="calc-btn op-btn" data-val="**" title="Power">xʸ</button>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="btn-row" role="group" aria-label="Numbers 4-6 and multiply">
+                        <button class="calc-btn num-btn" data-val="4" title="Number 4">4</button>
+                        <button class="calc-btn num-btn" data-val="5" title="Number 5">5</button>
+                        <button class="calc-btn num-btn" data-val="6" title="Number 6">6</button>
+                        <button class="calc-btn op-btn" data-val="×" title="Multiply">×</button>
+                        <button class="calc-btn fn-btn" data-val="sqrt(" title="Square root">√</button>
+                    </div>
+
+                    <!-- Row 5 -->
+                    <div class="btn-row" role="group" aria-label="Numbers 1-3 and subtract">
+                        <button class="calc-btn num-btn" data-val="1" title="Number 1">1</button>
+                        <button class="calc-btn num-btn" data-val="2" title="Number 2">2</button>
+                        <button class="calc-btn num-btn" data-val="3" title="Number 3">3</button>
+                        <button class="calc-btn op-btn" data-val="-" title="Subtract">−</button>
+                        <button class="calc-btn fn-btn" data-val="ceil(" title="Ceiling">⌈x⌉</button>
+                    </div>
+
+                    <!-- Row 6 -->
+                    <div class="btn-row" role="group" aria-label="Zero, decimal, add and equals">
+                        <button class="calc-btn num-btn wide" data-val="0" title="Number 0">0</button>
+                        <button class="calc-btn num-btn" data-val="." title="Decimal point">.</button>
+                        <button class="calc-btn op-btn" data-val="+" title="Add">+</button>
+                        <button class="calc-btn eq-btn" data-action="equals" title="Calculate (Enter)">=</button>
+                    </div>
+
+                </div><!-- /btn-grid -->
+
+                <!-- Keyboard hint -->
+                <div class="keyboard-hint" role="complementary">⌨ Keyboard supported — Enter to calculate, Esc to clear,
+                    C to copy</div>
+            </div>
+        </div>
+
+        <!-- CONVERTER TAB -->
+        <div class="tab-content" id="tab-convert" role="tabpanel" aria-labelledby="convert">
+            <div class="converter-wrapper">
+                <div class="conv-display" role="group" aria-label="Unit converter display">
+                    <input class="conv-input" id="conv-value" type="number" placeholder="0"
+                        aria-label="Value to convert" />
+                    <div class="conv-arrow" aria-hidden="true">→</div>
+                    <div class="conv-result" id="conv-result" role="status" aria-live="polite"
+                        aria-label="Conversion result">—</div>
+                </div>
+                <div class="conv-label-row">
+                    <span class="conv-label-text" id="conv-label" role="status" aria-live="polite">Select a conversion
+                        below</span>
+                </div>
+
+                <div class="conv-categories">
+                    {% set categories = [
+                    ("📏 LENGTH", ["km_to_mi","mi_to_km","m_to_ft","ft_to_m","cm_to_in","in_to_cm"]),
+                    ("⚖️ WEIGHT", ["kg_to_lb","lb_to_kg","g_to_oz","oz_to_g"]),
+                    ("🌡 TEMPERATURE", ["c_to_f","f_to_c","c_to_k","k_to_c"]),
+                    ("🚗 SPEED", ["kmh_to_mph","mph_to_kmh","ms_to_kmh","kmh_to_ms"]),
+                    ("📐 AREA", ["sqm_to_sqft","sqft_to_sqm"]),
+                    ("💾 DATA", ["mb_to_gb","gb_to_tb","kb_to_mb"])
+                    ] %}
+                    {% for cat_name, keys in categories %}
+                    <div class="conv-cat" role="group" aria-label="{{ cat_name }}">
+                        <div class="conv-cat-title">{{ cat_name }}</div>
+                        <div class="conv-cat-btns">
+                            {% for key in keys %}
+                            <button class="conv-btn" data-key="{{ key }}" title="Convert {{ conversions[key] }}">{{
+                                conversions[key] }}</button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- HISTORY TAB -->
+        <div class="tab-content" id="tab-history" role="tabpanel" aria-labelledby="history">
+            <div class="history-wrapper">
+                <div class="history-header">
+                    <span>COMPUTATION LOG</span>
+                    <button class="clear-hist-btn" id="clear-history" title="Clear entire calculation history">CLEAR
+                        LOG</button>
+                </div>
+                <div class="history-list" id="history-list" role="list" aria-label="Calculation history">
+                    <div class="history-empty" role="status">No calculations yet.<br>Start computing to see your
+                        history.</div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /container -->
+
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
