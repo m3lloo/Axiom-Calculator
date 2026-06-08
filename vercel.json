@@ -1,9 +1,3 @@
 {
-  "buildCommand": "pip install -r requirements.txt",
-  "runtime": "python3.12",
-  "functions": {
-    "app.py": {
-      "runtime": "python3.12"
-    }
-  }
+    "buildCommand": "pip install -r requirements.txt"
 }
